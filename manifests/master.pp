@@ -38,7 +38,8 @@ class ipa::master (
   $http_pin      = {},
   $subject       = {},
   $selfsign      = {},
-  $idstart       = {}
+  $idstart       = {},
+  $ipaddress     = {}
 ) {
 
   Ipa::Serverinstall[$::fqdn] ->  File['/etc/ipa/primary'] -> Ipa::Hostadd <<| |>> -> Ipa::Replicareplicationfirewall <<| tag == "ipa-replica-replication-firewall-${ipa::master::domain}" |>> -> Ipa::Replicaprepare <<| tag == "ipa-replica-prepare-${ipa::master::domain}" |>> -> Ipa::Createreplicas[$::fqdn]
@@ -130,6 +131,7 @@ class ipa::master (
     ntpopt        => $ipa::master::ntpopt,
     extcaopt      => $ipa::master::extcaopt,
     idstartopt    => $ipa::master::idstartopt,
+    ipaddress     => $ipa::master::ipaddress,
     require       => Package[$ipa::master::svrpkg]
   }
 
