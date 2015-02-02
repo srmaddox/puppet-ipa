@@ -47,6 +47,7 @@
 #  $clntpkg = 'ipa-client' - IPA client package.
 #  $ldaputils = true - Controls the instalation of the LDAP utilities package.
 #  $ldaputilspkg = 'openldap-clients' - LDAP utilities package.
+#  $ipaddress = '' - Primary IP address of server for IPA to listen on
 #
 # === Variables
 #
@@ -111,6 +112,7 @@ class ipa (
     default => 'openldap-clients',
   },
   $idstart       = false
+  $ipaddress     = undef
 ) {
 
   @package { $ipa::svrpkg:
@@ -253,7 +255,8 @@ class ipa (
       http_pin      => $ipa::http_pin,
       subject       => $ipa::subject,
       selfsign      => $ipa::selfsign,
-      idstart       => $ipa::idstart
+      idstart       => $ipa::idstart,
+      ipaddress     => $ipa::ipaddress
     }
 
     if ! $ipa::adminpw {
