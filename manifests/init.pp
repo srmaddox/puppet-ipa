@@ -111,7 +111,7 @@ class ipa (
     Debian  => 'ldap-utils',
     default => 'openldap-clients',
   },
-  $idstart       = false
+  $idstart       = false,
   $ipaddress     = undef
 ) {
 
